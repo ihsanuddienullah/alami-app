@@ -1,9 +1,7 @@
 import React from 'react';
 
-function DetailSeller() {
-  return (
-    <div>DetailSeller</div>
-  );
-}
+const DetailSeller = () => (
+  <div>DetailSeller</div>
+);
 
 export default DetailSeller;
