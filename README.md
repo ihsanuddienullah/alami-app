@@ -1,14 +1,14 @@
 # Getting Started with ALAMI App
 
 ## Jika diberikan waktu lebih dalam mengerjakan test ini:
-Yang saya lakukan adalah berkomunikasi dengan developer lainnya terutama yang memiliki akses terhadap API untuk mengembangkan aplikasi ini menjadi lebih bagus, dikarenakan API yang ada memiliki hambatan karena CORS Policy ketika berinteraksi dengan website. Saya rasa testing API menggunakan Postman belum lengkap jika masih terdapat block access CORS Policy sehingga berbeda hasilnya ketika diimplementasikan di browser. Overall, secara code flow aplikasi ini sudah berjalan sebagaimana mestinya.
+Yang saya lakukan adalah berkomunikasi dengan developer lainnya terutama yang memiliki akses terhadap API untuk mengembangkan aplikasi ini menjadi lebih bagus, dikarenakan API yang ada memiliki hambatan karena CORS Policy ketika berinteraksi dengan website. Saya rasa testing API menggunakan Postman belum lengkap jika masih terdapat block access CORS Policy sehingga berbeda hasilnya ketika diimplementasikan di browser, dan melakukan testing. Overall, secara code flow aplikasi ini sudah berjalan sebagaimana mestinya.
 ## Available Scripts
 
 Cara menjalankan program:
 In the project directory, you can run:
 
 ### `yarn start`
-
+Don't forget to turn on the CORS extension in chrome
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
