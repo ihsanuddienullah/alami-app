@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { ContainerPage, ButtonStyled } from 'components';
 import {
-  addProduct, searchProductByKeyword, listProductBySellerId,
+  addProduct, listProductBySellerId,
 } from 'services/api';
 import {
   Table, Column, HeaderCell, Cell,
@@ -14,7 +14,6 @@ const DetailSeller = () => {
     sellerId: 0, nama: '', satuan: '', hargaSatuan: 0, deskripsi: '',
   });
   const [newProduct, setNewProduct] = useState({});
-  const [searchKeyword, setSearchKeyword] = useState('');
   const [dataProduk, setDataProduk] = useState({});
   const [showAddSellerForm, setShowAddSellerForm] = useState(false);
 
@@ -75,26 +74,6 @@ const DetailSeller = () => {
     });
   };
 
-  const changeSearch = (e) => {
-    e.preventDefault();
-    setSearchKeyword(e.target.value);
-  };
-
-  const searchProduk = async () => {
-    await searchProductByKeyword(searchKeyword)
-      .then((res) => {
-        if (res.data.status === 'Error') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: `${res.data.message}`,
-          });
-        } else {
-          setDataProduk(res.data);
-        }
-      });
-  };
-
   return (
     <div className="home-page">
       <ContainerPage>
@@ -125,13 +104,7 @@ const DetailSeller = () => {
           </form>
         </div>
         )}
-        <div className="form-search">
-          <label htmlFor="search">
-            Cari Produk
-            <input type="text" placeholder="Ketik nama produk" id="search" value={searchKeyword} onChange={(e) => changeSearch(e)} />
-          </label>
-          <ButtonStyled text="Cari" type="button" onClick={() => searchProduk()} />
-        </div>
+        <h3>List Produk</h3>
         <Table data={dataProduk.data}>
           <Column width={200} sortable fixed resizable>
             <HeaderCell>Nama</HeaderCell>
