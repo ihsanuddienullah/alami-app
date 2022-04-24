@@ -17,7 +17,7 @@ const DetailSeller = () => {
   const [dataProduk, setDataProduk] = useState({});
   const [showAddSellerForm, setShowAddSellerForm] = useState(false);
 
-  const data = useSelector((state) => state);
+  const data = useSelector((state) => state?.seller?.getSellerById);
 
   useEffect(() => {
     const fetchApi = async () => {
