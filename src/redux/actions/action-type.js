@@ -1,0 +1,2 @@
+export const GET_LIST_SELLER = 'GET_LIST_SELLER';
+export const GET_SELLER_BY_ID = 'GET_SELLER_BY_ID';
