@@ -2,25 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { ContainerPage, ButtonStyled } from 'components';
 import {
-  addSeller, searchProductByKeyword, listProductBySellerId,
+  addProduct, searchProductByKeyword, listProductBySellerId,
 } from 'services/api';
 import {
   Table, Column, HeaderCell, Cell,
 } from 'rsuite-table';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSellerById } from 'redux/reducer';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const DetailSeller = () => {
-  const [addSellerFormValue, setAddSellerFormValue] = useState({ nama: '', kota: '' });
-  const [newSeller, setNewSeller] = useState({});
+  const [addProductFormValue, setAddProductFormValue] = useState({
+    sellerId: 0, nama: '', satuan: '', hargaSatuan: 0, deskripsi: '',
+  });
+  const [newProduct, setNewProduct] = useState({});
   const [searchKeyword, setSearchKeyword] = useState('');
   const [dataProduk, setDataProduk] = useState({});
   const [showAddSellerForm, setShowAddSellerForm] = useState(false);
 
-  const dispatch = useDispatch();
   const data = useSelector((state) => state);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -38,19 +36,29 @@ const DetailSeller = () => {
         });
     };
     fetchApi();
-  }, []);
+  }, [newProduct]);
 
   const changeValue = (label, e) => {
     if (label === 'nama') {
-      setAddSellerFormValue({ ...addSellerFormValue, nama: e.target.value });
+      setAddProductFormValue({ ...addProductFormValue, nama: e.target.value });
+    } else if (label === 'satuan') {
+      setAddProductFormValue({ ...addProductFormValue, satuan: e.target.value });
+    } else if (label === 'hargaSatuan') {
+      setAddProductFormValue({ ...addProductFormValue, hargaSatuan: e.target.value });
     } else {
-      setAddSellerFormValue({ ...addSellerFormValue, kota: e.target.value });
+      setAddProductFormValue({ ...addProductFormValue, deskripsi: e.target.value });
     }
   };
 
-  const submitAddSeller = async (e) => {
+  const submitAddProduct = async (e) => {
     e.preventDefault();
-    await addSeller(addSellerFormValue.nama, addSellerFormValue.kota)
+    await addProduct(
+      data?.id,
+      addProductFormValue.nama,
+      addProductFormValue.satuan,
+      addProductFormValue.hargaSatuan,
+      addProductFormValue.deskripsi,
+    )
       .then((res) => {
         if (res.data.status === 'Error') {
           Swal.fire({
@@ -59,12 +67,12 @@ const DetailSeller = () => {
             text: `${res.data.message}`,
           });
         } else {
-          setNewSeller(res.data);
+          setNewProduct(res.data);
         }
       });
-    await dispatch(getSellerById(newSeller));
-    await setAddSellerFormValue({ nama: '', kota: '' });
-    navigate('/detail-seller');
+    await setAddProductFormValue({
+      sellerId: 0, nama: '', satuan: '', hargaSatuan: 0, deskripsi: '',
+    });
   };
 
   const changeSearch = (e) => {
@@ -96,14 +104,22 @@ const DetailSeller = () => {
         <br />
         {showAddSellerForm && (
         <div className="add-seller-form">
-          <form onSubmit={submitAddSeller}>
+          <form onSubmit={submitAddProduct}>
             <label htmlFor="nama">
               Nama
-              <input type="text" placeholder="Ketik nama" id="nama" value={addSellerFormValue.nama} onChange={(e) => changeValue('nama', e)} />
+              <input type="text" placeholder="Ketik nama" id="nama" value={addProductFormValue.nama} onChange={(e) => changeValue('nama', e)} />
             </label>
-            <label htmlFor="kota">
-              Kota
-              <input type="text" placeholder="Ketik kota" id="kota" value={addSellerFormValue.kota} onChange={(e) => changeValue('kota', e)} />
+            <label htmlFor="satuan">
+              Satuan
+              <input type="text" placeholder="Ketik satuan" id="satuan" value={addProductFormValue.satuan} onChange={(e) => changeValue('satuan', e)} />
+            </label>
+            <label htmlFor="hargaSatuan">
+              Harga Satuan
+              <input type="number" placeholder="Ketik hargaSatuan" id="hargaSatuan" value={addProductFormValue.hargaSatuan} onChange={(e) => changeValue('hargaSatuan', e)} />
+            </label>
+            <label htmlFor="deskripsi">
+              Deskripsi
+              <input type="text" placeholder="Ketik deskripsi" id="deskripsi" value={addProductFormValue.deskripsi} onChange={(e) => changeValue('deskripsi', e)} />
             </label>
             <ButtonStyled text="Submit" type="submit" />
           </form>
