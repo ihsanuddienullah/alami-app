@@ -75,7 +75,7 @@ const DetailSeller = () => {
   };
 
   return (
-    <div className="home-page">
+    <div className="detail-seller-page">
       <ContainerPage>
         <div className="add-seller-btn">
           <ButtonStyled text="Tambah Produk" type="button" onClick={() => setShowAddSellerForm(!showAddSellerForm)} />
