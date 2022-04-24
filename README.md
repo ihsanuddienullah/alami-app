@@ -1,9 +1,10 @@
-# Getting Started with Create React App
+# Getting Started with ALAMI App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## Jika diberikan waktu lebih dalam mengerjakan test ini:
+Yang saya lakukan adalah berkomunikasi dengan developer lainnya terutama yang memiliki akses terhadap API, dikarenakan API yang ada memiliki hambatan karena CORS Policy ketika berinteraksi dengan website. Saya rasa testing API menggunakan Postman belum lengkap jika masih terdapat block access CORS Policy sehingga berbeda hasilnya ketika diimplementasikan di browser.
 ## Available Scripts
 
+Cara menjalankan program:
 In the project directory, you can run:
 
 ### `yarn start`
