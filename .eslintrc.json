@@ -41,6 +41,9 @@
             },
             "allowChildren": false
         }],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "no-param-reassign": 0,
+        "import/no-named-as-default": 0
+
     }
 }

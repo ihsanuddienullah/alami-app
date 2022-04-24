@@ -7,12 +7,19 @@ import {
 import {
   Table, Column, HeaderCell, Cell,
 } from 'rsuite-table';
+import { useDispatch } from 'react-redux';
+import { getSellerById, getListSeller } from 'redux/reducer';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [addSellerFormValue, setAddSellerFormValue] = useState({ nama: '', kota: '' });
+  const [newSeller, setNewSeller] = useState({});
   const [searchKeyword, setSearchKeyword] = useState('');
   const [dataProduk, setDataProduk] = useState({});
   const [showAddSellerForm, setShowAddSellerForm] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const changeValue = (label, e) => {
     if (label === 'nama') {
@@ -32,9 +39,14 @@ const Home = () => {
             title: 'Oops...',
             text: `${res.data.message}`,
           });
+        } else {
+          setNewSeller(res.data);
         }
       });
+    await dispatch(getSellerById(newSeller));
+    await dispatch(getListSeller(newSeller));
     setAddSellerFormValue({ nama: '', kota: '' });
+    navigate('/detail-seller');
   };
 
   const changeSearch = (e) => {
@@ -87,7 +99,7 @@ const Home = () => {
           <ButtonStyled text="Cari" type="button" onClick={() => searchProduk()} />
         </div>
         <Table data={dataProduk.data}>
-          <Column width={100} sortable fixed resizable>
+          <Column width={200} sortable fixed resizable>
             <HeaderCell>Nama</HeaderCell>
             <Cell dataKey="nama" />
           </Column>

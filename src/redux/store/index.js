@@ -1,5 +1,3 @@
-import storage from 'redux-persist/lib/storage';
-import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import {
   persistReducer,
@@ -10,18 +8,21 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import appReducer from 'redux/reducer';
+import storage from 'redux-persist/lib/storage';
+import sellerReducer from '../reducer/index';
 
 const persistConfig = {
-  key: 'counter',
+  key: 'root',
+  version: 1,
   storage,
 };
 
-const reducers = combineReducers(appReducer);
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, sellerReducer);
 
-export default configureStore({
-  reducer: persistedReducer,
+export const store = configureStore({
+  reducer: {
+    seller: persistedReducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

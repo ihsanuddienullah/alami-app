@@ -1,19 +1,24 @@
-import { GET_LIST_SELLER, GET_SELLER_BY_ID } from 'redux/actions/action-type';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  listSeller: [],
-  sellerById: {},
+  getListSeller: [],
+  getSellerById: {},
 };
 
-const appReducer = (state = initialState, { type, payload } = {}) => {
-  switch (type) {
-    case GET_LIST_SELLER:
-      return { ...state, listSeller: payload };
-    case GET_SELLER_BY_ID:
-      return { ...state, sellerById: payload };
-    default:
-      return state;
-  }
-};
+export const sellerSlice = createSlice({
+  name: 'seller',
+  initialState,
+  reducers: {
+    getListSeller: (state, action) => {
+      state.getListSeller = [...state.getListSeller, action.payload];
+    },
+    getSellerById: (state, action) => {
+      state.getSellerById = action.payload;
+    },
+  },
+});
 
-export default appReducer;
+// Action creators are generated for each case reducer function
+export const { getListSeller, getSellerById } = sellerSlice.actions;
+
+export default sellerSlice.reducer;
