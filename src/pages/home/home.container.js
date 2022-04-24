@@ -34,6 +34,7 @@ const Home = () => {
           });
         }
       });
+    setAddSellerFormValue({ nama: '', kota: '' });
   };
 
   const changeSearch = (e) => {
@@ -57,60 +58,62 @@ const Home = () => {
   };
 
   return (
-    <ContainerPage>
-      <div className="add-seller-btn">
-        <ButtonStyled text="Add Seller" type="button" onClick={() => setShowAddSellerForm(!showAddSellerForm)} />
-      </div>
-      <br />
-      {showAddSellerForm && (
-      <div className="add-seller-form">
-        <form onSubmit={submitAddSeller}>
-          <label htmlFor="nama">
-            Name
-            <input type="text" id="nama" value={addSellerFormValue.nama} onChange={(e) => changeValue('nama', e)} />
+    <div className="home-page">
+      <ContainerPage>
+        <div className="add-seller-btn">
+          <ButtonStyled text="Tambah Penjual" type="button" onClick={() => setShowAddSellerForm(!showAddSellerForm)} />
+        </div>
+        <br />
+        {showAddSellerForm && (
+        <div className="add-seller-form">
+          <form onSubmit={submitAddSeller}>
+            <label htmlFor="nama">
+              Nama
+              <input type="text" placeholder="Ketik nama" id="nama" value={addSellerFormValue.nama} onChange={(e) => changeValue('nama', e)} />
+            </label>
+            <label htmlFor="kota">
+              Kota
+              <input type="text" placeholder="Ketik kota" id="kota" value={addSellerFormValue.kota} onChange={(e) => changeValue('kota', e)} />
+            </label>
+            <ButtonStyled text="Submit" type="submit" />
+          </form>
+        </div>
+        )}
+        <div className="form-search">
+          <label htmlFor="search">
+            Cari Produk
+            <input type="text" placeholder="Ketik nama produk" id="search" value={searchKeyword} onChange={(e) => changeSearch(e)} />
           </label>
-          <label htmlFor="kota">
-            Kota
-            <input type="text" id="kota" value={addSellerFormValue.kota} onChange={(e) => changeValue('kota', e)} />
-          </label>
-          <ButtonStyled text="Submit" type="submit" />
-        </form>
-      </div>
-      )}
-      <div className="form-search">
-        <label htmlFor="search">
-          Search
-          <input type="text" id="search" value={searchKeyword} onChange={(e) => changeSearch(e)} />
-        </label>
-        <ButtonStyled text="Search" type="button" onClick={() => searchProduk()} />
-      </div>
-      <Table data={dataProduk.data}>
-        <Column width={100} sortable fixed resizable>
-          <HeaderCell>Nama</HeaderCell>
-          <Cell dataKey="nama" />
-        </Column>
+          <ButtonStyled text="Cari" type="button" onClick={() => searchProduk()} />
+        </div>
+        <Table data={dataProduk.data}>
+          <Column width={100} sortable fixed resizable>
+            <HeaderCell>Nama</HeaderCell>
+            <Cell dataKey="nama" />
+          </Column>
 
-        <Column width={100} sortable resizable>
-          <HeaderCell>Satuan</HeaderCell>
-          <Cell dataKey="satuan" />
-        </Column>
+          <Column width={100} sortable resizable>
+            <HeaderCell>Satuan</HeaderCell>
+            <Cell dataKey="satuan" />
+          </Column>
 
-        <Column width={100} sortable resizable>
-          <HeaderCell>Harga Satuan</HeaderCell>
-          <Cell dataKey="hargaSatuan" />
-        </Column>
+          <Column width={200} sortable resizable>
+            <HeaderCell>Harga Satuan</HeaderCell>
+            <Cell dataKey="hargaSatuan" />
+          </Column>
 
-        <Column width={100} sortable resizable>
-          <HeaderCell>Seller Id</HeaderCell>
-          <Cell dataKey="sellerId" />
-        </Column>
+          <Column width={100} sortable resizable>
+            <HeaderCell>Seller Id</HeaderCell>
+            <Cell dataKey="sellerId" />
+          </Column>
 
-        <Column width={300} sortable resizable>
-          <HeaderCell>Deskripsi</HeaderCell>
-          <Cell dataKey="deskripsi" />
-        </Column>
-      </Table>
-    </ContainerPage>
+          <Column width={300} sortable resizable>
+            <HeaderCell>Deskripsi</HeaderCell>
+            <Cell dataKey="deskripsi" />
+          </Column>
+        </Table>
+      </ContainerPage>
+    </div>
   );
 };
 

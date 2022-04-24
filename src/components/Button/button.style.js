@@ -18,5 +18,5 @@ export const ButtonStyled = styled.button`
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: #fff;
     background-color: #069EC6;    
-    margin-top: 20px;
+    margin-top: 10px;
 `;

@@ -1,4 +1,5 @@
-import ContainerPage from './Container';
-import ButtonStyled from './Button';
+import ContainerPage from './container';
+import ButtonStyled from './button';
+import Header from './header';
 
-export { ContainerPage, ButtonStyled };
+export { ContainerPage, ButtonStyled, Header };
